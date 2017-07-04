@@ -1,0 +1,55 @@
+version: '2'
+services:
+    operam-nginx:
+        container_name: operam-nginx
+        build: docker/images-dev/nginx
+        image: operam-nginx
+        volumes:
+            - ./:/app
+            - /etc/localtime:/etc/localtime:ro
+        environment:
+            - VIRTUAL_HOST=operam.dev
+        networks:
+            operam-network:
+                aliases:
+                    - operam-nginx
+        expose:
+            - 80
+        ports:
+            - "80:80"
+        restart: always
+
+    operam-node:
+        container_name: operam-node
+        build: docker/images-dev/node
+        image: operam-node
+        volumes:
+            - ./:/app
+            - /etc/localtime:/etc/localtime:ro
+        working_dir: /app
+        networks:
+            operam-network:
+                aliases:
+                    - operam-node
+        restart: always
+        expose:
+            - 3000
+
+    operam-capistrano:
+        container_name: operam-capistrano
+        build: docker/images-dev/capistrano
+        image: operam-capistrano
+        volumes:
+            - ./:/app
+            - /etc/localtime:/etc/localtime:ro
+        working_dir: /app
+        networks:
+            operam-network:
+                aliases:
+                    - operam-capistrano
+        restart: always
+        ports:
+            - "22235:22"
+
+networks:
+    operam-network:
