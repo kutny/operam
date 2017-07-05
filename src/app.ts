@@ -5,6 +5,7 @@ import {CategoryController} from "./Operam/Category/CategoryController";
 import {PostController} from "./Operam/Post/PostController";
 import {HelloWorldController} from "./Operam/HelloWorld/HelloWorldController";
 import {DownloaderController} from "./Operam/Downloader/DownloaderController";
+import {RedirectorController} from "./Operam/UrlShortener/RedirectorController";
 
 /**
  * Setup routing-controllers to use typedi container.
@@ -24,7 +25,8 @@ const koaApp = createKoaServer({
         CategoryController,
         PostController,
         HelloWorldController,
-        DownloaderController
+        DownloaderController,
+        RedirectorController
     ]
 });
 
